@@ -98,9 +98,22 @@ defmodule Benchee.Benchmark do
         printer \\ Printer,
         runner \\ Runner
       ) do
+    printer.system_information(suite)
     printer.configuration_information(suite)
     scenario_context = %ScenarioContext{config: config, printer: printer}
     scenarios = runner.run_scenarios(scenarios, scenario_context)
     %Suite{suite | scenarios: scenarios}
+  end
+
+  # delegate use to Benchee.Project.Benchmark.__using__/1
+  defmacro __using__(opts) do
+    require Benchee.Project.Benchmark
+
+    quoted =
+      quote do
+        use Benchee.Project.Benchmark, unquote(opts)
+      end
+
+    Macro.expand(quoted, __ENV__)
   end
 end

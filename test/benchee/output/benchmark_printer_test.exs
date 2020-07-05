@@ -25,6 +25,30 @@ defmodule Benchee.Output.BenchmarkPrintertest do
     assert output =~ "Something"
   end
 
+  describe ".system_information" do
+    output =
+      capture_io(fn ->
+        %{
+          configuration: %Configuration{
+            parallel: 2,
+            time: 10_000,
+            warmup: 0,
+            inputs: nil
+          },
+          # scenarios: [%Scenario{job_name: "one"}, %Scenario{job_name: "two"}],
+          system: @system_info
+        }
+        |> system_information
+      end)
+
+    assert output =~ "Erlang 19.2"
+    assert output =~ "Elixir 1.4"
+    assert output =~ "Intel"
+    assert output =~ "Cores: 4"
+    assert output =~ "macOS"
+    assert output =~ "8568392814"
+  end
+
   describe ".configuration_information" do
     test "sys information" do
       output =
@@ -37,12 +61,6 @@ defmodule Benchee.Output.BenchmarkPrintertest do
           |> configuration_information
         end)
 
-      assert output =~ "Erlang 19.2"
-      assert output =~ "Elixir 1.4"
-      assert output =~ "Intel"
-      assert output =~ "Cores: 4"
-      assert output =~ "macOS"
-      assert output =~ "8568392814"
       assert output =~ ~r/following configuration/i
       assert output =~ "warmup: 0 ns"
       assert output =~ "time: 10 μs"
@@ -112,6 +130,14 @@ defmodule Benchee.Output.BenchmarkPrintertest do
         capture_io(fn ->
           %{configuration: %{print: %{configuration: false}}}
           |> configuration_information
+        end)
+
+      assert output == ""
+
+      output =
+        capture_io(fn ->
+          %{configuration: %{print: %{system: false}}}
+          |> system_information
         end)
 
       assert output == ""

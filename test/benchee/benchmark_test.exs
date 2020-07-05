@@ -98,6 +98,7 @@ defmodule Benchee.BenchmarkTest do
     test "prints the configuration information" do
       Benchmark.collect(%Suite{}, TestPrinter, TestRunner)
 
+      assert_receive :system_information
       assert_receive :configuration_information
     end
 

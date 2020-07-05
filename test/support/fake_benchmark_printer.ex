@@ -5,6 +5,10 @@ defmodule Benchee.Test.FakeBenchmarkPrinter do
     send(self(), {:duplicate, name})
   end
 
+  def system_information(_) do
+    send(self(), :system_information)
+  end
+
   def configuration_information(_) do
     send(self(), :configuration_information)
   end

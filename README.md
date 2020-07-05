@@ -214,6 +214,7 @@ The available options are the following (also documented in [hexdocs](https://he
 * `print` - a map or keyword list from atoms to `true` or `false` to configure if the output identified by the atom will be printed during the standard benchee benchmarking process. All options are enabled by default (true). Options are:
   * `:benchmarking`  - print when Benchee starts benchmarking a new job (`Benchmarking name ...`)
   * `:configuration` - a summary of configured benchmarking options including estimated total run time is printed before benchmarking starts
+  * `:system` - a description of a system benchmark is being run on
   * `:fast_warning` - warnings are displayed if functions are executed too fast leading to inaccurate measures
 * `:unit_scaling` - the strategy for choosing a unit for durations,
   counts & memory measurements. May or may not be implemented by a given formatter (The console formatter implements it).

@@ -65,7 +65,8 @@ defmodule Benchee.ConfigurationTest do
         print: %{
           configuration: false,
           fast_warning: false,
-          benchmarking: true
+          benchmarking: true,
+          system: true
         }
       }
 

@@ -29,7 +29,8 @@ defmodule Benchee.Mixfile do
         "safe_coveralls.travis": :test
       ],
       dialyzer: [
-        flags: [:unmatched_returns, :error_handling, :race_conditions, :underspecs]
+        flags: [:unmatched_returns, :error_handling, :race_conditions, :underspecs],
+        plt_add_apps: [:mix]
       ],
       name: "Benchee",
       source_url: "https://github.com/PragTob/benchee",

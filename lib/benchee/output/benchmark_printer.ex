@@ -15,19 +15,17 @@ defmodule Benchee.Output.BenchmarkPrinter do
   end
 
   @doc """
-  Prints general information such as system information and estimated
-  benchmarking time.
+  Prints general information about the system such as operating system.
   """
-  def configuration_information(%{configuration: %{print: %{configuration: false}}}) do
+  def system_information(%{configuration: %{print: %{system: false}}}) do
     nil
   end
 
-  def configuration_information(%{scenarios: scenarios, system: sys, configuration: config}) do
-    system_information(sys)
-    suite_information(scenarios, config)
+  def system_information(%{system: sys}) do
+    print_system_information(sys)
   end
 
-  defp system_information(%{
+  defp print_system_information(%{
          erlang: erlang_version,
          elixir: elixir_version,
          os: os,
@@ -45,7 +43,18 @@ defmodule Benchee.Output.BenchmarkPrinter do
     """)
   end
 
-  defp suite_information(scenarios, %{
+  @doc """
+  Prints general benchmark information such as estimated benchmarking time.
+  """
+  def configuration_information(%{configuration: %{print: %{configuration: false}}}) do
+    nil
+  end
+
+  def configuration_information(%{scenarios: scenarios, configuration: config}) do
+    print_suite_information(scenarios, config)
+  end
+
+  defp print_suite_information(scenarios, %{
          parallel: parallel,
          time: time,
          warmup: warmup,
