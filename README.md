@@ -1,12 +1,20 @@
-# Benchee [![Hex Version](https://img.shields.io/hexpm/v/benchee.svg)](https://hex.pm/packages/benchee) [![docs](https://img.shields.io/badge/docs-hexpm-blue.svg)](https://hexdocs.pm/benchee/) [![CI](https://github.com/bencheeorg/benchee/workflows/CI/badge.svg)](https://github.com/bencheeorg/benchee/actions?query=branch%3Amain) [![Coverage Status](https://coveralls.io/repos/github/bencheeorg/benchee/badge.svg?branch=master)](https://coveralls.io/github/bencheeorg/benchee?branch=master)
+# Benchee
+
+[![CI](https://github.com/bencheeorg/benchee/workflows/CI/badge.svg)](https://github.com/bencheeorg/benchee/actions?query=branch%3Amain)
+[![Coverage Status](https://coveralls.io/repos/github/bencheeorg/benchee/badge.svg?branch=master)](https://coveralls.io/github/bencheeorg/benchee?branch=master)
+[![Hex Version](https://img.shields.io/hexpm/v/benchee.svg)](https://hex.pm/packages/benchee)
+[![Hex Docs](https://img.shields.io/badge/docs-hexpm-blue.svg)](https://hexdocs.pm/benchee/)
+[![Total Download](https://img.shields.io/hexpm/dt/benchee.svg)](https://hex.pm/packages/benchee)
+[![License](https://img.shields.io/hexpm/l/benchee.svg)](https://github.com/bencheeorg/benchee/blob/master/LICENSE)
+[![Last Updated](https://img.shields.io/github/last-commit/bencheeorg/benchee.svg)](https://github.com/bencheeorg/benchee/commits/master)
 
 **There is a [known issue regarding measurement accuracy for nanoseconds on MacOS](https://github.com/bencheeorg/benchee/issues/313)**
 
 Library for easy and nice (micro) benchmarking in Elixir. Benchee allows you to compare the performance of different pieces of code at a glance. It is also versatile and extensible, relying only on functions. There are also a bunch of [plugins](#plugins) to draw pretty graphs and more!
 
-benchee runs each of your functions for a given amount of time after an initial warmup, it then measures their run time and optionally memory consumption. It then shows different statistical values like average, standard deviation etc. See [features](#features)
+Benchee runs each of your functions for a given amount of time after an initial warmup, it then measures their run time and optionally memory consumption. It then shows different statistical values like average, standard deviation etc. See [features](#features)
 
-benchee has a nice and concise main interface, its behavior can be altered through lots of [configuration options](#configuration):
+Benchee has a nice and concise main interface, its behavior can be altered through lots of [configuration options](#configuration):
 
 ```elixir
 list = Enum.to_list(1..10_000)
@@ -61,7 +69,7 @@ map.flatten       781.25 KB - 1.25x memory usage +156.28 KB
 **All measurements for memory usage were the same**
 ```
 
-The aforementioned [plugins](#plugins) like [benchee_html](https://github.com/bencheeorg/benchee_html) make it possible to generate nice looking [html reports](http://www.pragtob.info/benchee/README/results.html), where individual graphs can also be exported as PNG images:
+The aforementioned [plugins](#plugins) like [benchee_html](https://github.com/bencheeorg/benchee_html) make it possible to generate nice looking [HTML reports](http://www.pragtob.info/benchee/README/results.html), where individual graphs can also be exported as PNG images:
 
 ![report](http://www.pragtob.info/benchee/images/report.png)
 
@@ -124,11 +132,13 @@ In addition, you can optionally output an extended set of statistics:
 
 ## Installation
 
-Add benchee to your list of dependencies in `mix.exs`:
+Add `:benchee` to your list of dependencies in `mix.exs`:
 
 ```elixir
 defp deps do
-  [{:benchee, "~> 1.0", only: :dev}]
+  [
+    {:benchee, "~> 1.0", only: :dev}
+  ]
 end
 ```
 
@@ -187,7 +197,7 @@ map.flatten        1.22 K - 1.92x slower +393.09 μs
 
 See [Features](#features) for a description of the different statistical values and what they mean.
 
-If you're looking to see how to make something specific work, please refer to the [samples](https://github.com/PragTob/benchee/tree/master/samples) directory. Also, especially when wanting to extend benchee, check out the [hexdocs](https://hexdocs.pm/benchee/api-reference.html).
+If you're looking to see how to make something specific work, please refer to the [samples](https://github.com/PragTob/benchee/tree/master/samples) directory. Also, especially when wanting to extend Benchee, check out the [hexdocs](https://hexdocs.pm/benchee/api-reference.html).
 
 ### Configuration
 
@@ -211,16 +221,16 @@ The available options are the following (also documented in [hexdocs](https://he
 * `parallel` - the function of each benchmarking job will be executed in `parallel` number processes. If `parallel: 4` then 4 processes will be spawned that all execute the _same_ function for the given time. When `time` seconds have passed, 4 new processes will be spawned for the next scenario (meaning a new input or another function to be benchmarked). This gives you more data in the same time, but also puts load on the system interfering with benchmark results. For more on the pros and cons of parallel benchmarking [check the wiki](https://github.com/bencheeorg/benchee/wiki/Parallel-Benchmarking). Defaults to 1 (no parallel execution).
 * `save` - specify a `path` where to store the results of the current benchmarking suite, tagged with the specified `tag`. See [Saving & Loading](#saving-loading-and-comparing-previous-runs).
 * `load` - load saved suite or suites to compare your current benchmarks against. Can be a string or a list of strings or patterns. See [Saving & Loading](#saving-loading-and-comparing-previous-runs).
-* `print` - a map or keyword list from atoms to `true` or `false` to configure if the output identified by the atom will be printed during the standard benchee benchmarking process. All options are enabled by default (true). Options are:
+* `print` - a map or keyword list from atoms to `true` or `false` to configure if the output identified by the atom will be printed during the standard Benchee benchmarking process. All options are enabled by default (true). Options are:
   * `:benchmarking`  - print when Benchee starts benchmarking a new job (`Benchmarking name ...`)
   * `:configuration` - a summary of configured benchmarking options including estimated total run time is printed before benchmarking starts
   * `:fast_warning` - warnings are displayed if functions are executed too fast leading to inaccurate measures
 * `:unit_scaling` - the strategy for choosing a unit for durations,
   counts & memory measurements. May or may not be implemented by a given formatter (The console formatter implements it).
-  When scaling a value, benchee finds the "best fit"
+  When scaling a value, Benchee finds the "best fit"
   unit (the largest unit for which the result is at least 1). For example,
   1_200_000 scales to `1.2 M`, while `800_000` scales to `800 K`. The
-  `unit_scaling` strategy determines how benchee chooses the best fit unit for
+  `unit_scaling` strategy determines how Benchee chooses the best fit unit for
   an entire list of values, when the individual values in the list may have
   different best fit units. There are four strategies, defaulting to `:best`:
     * `:best`     - the most frequent best fit unit will be used, a tie
@@ -239,7 +249,7 @@ The available options are the following (also documented in [hexdocs](https://he
 
 ### Measuring memory consumption
 
-Starting with version 0.13, users can now get measurements of how much memory their benchmarked scenarios use. The measurement is **limited to the process that benche executes your provided code in** - i.e. other processes (like worker pools)/the whole BEAM isn't taken into account.
+Starting with version 0.13, users can now get measurements of how much memory their benchmarked scenarios use. The measurement is **limited to the process that Benchee executes your provided code in** - i.e. other processes (like worker pools)/the whole BEAM isn't taken into account.
 
 This measurement is **not** the actual effect on the size of the BEAM VM size, but the total amount of memory that was allocated during the execution of a given scenario. This includes all memory that was garbage collected during the execution of that scenario.
 
@@ -425,7 +435,7 @@ Of course, **hooks are not included in the measurements**. So they are there esp
 
 #### Suite hooks
 
-It is very easy in benchee to do setup and teardown for the whole benchmarking suite (think: "before all" and "after all"). As benchee is just plain old functions, just do your setup and teardown before/after you call benchee:
+It is very easy in Benchee to do setup and teardown for the whole benchmarking suite (think: "before all" and "after all"). As Benchee is just plain old functions, just do your setup and teardown before/after you call Benchee:
 
 ```elixir
 your_setup()
@@ -773,7 +783,7 @@ This is a take on the _functional transformation_ of data applied to benchmarks:
 6. Calculate statistics between the scenarios (faster/slower...)
 7. Format the statistics in a suitable way and print them out
 
-This is also part of the **official API** and allows for more **fine grained control**. (It's also what benchee does internally when you use `Benchee.run/2`).
+This is also part of the **official API** and allows for more **fine grained control**. (It's also what Benchee does internally when you use `Benchee.run/2`).
 
 Do you just want to have all the raw run times? Just work with the result of `Benchee.collect/1`! Just want to have the calculated statistics and use your own formatting? Grab the result of `Benchee.statistics/1`! Or, maybe you want to write to a file or send an HTTP post to some online service? Just grab the complete suite after statistics were generated.
 
@@ -862,7 +872,7 @@ Of course there also are normal bar charts including standard deviation:
 
 ## Contributing [![Open Source Helpers](https://www.codetriage.com/pragtob/benchee/badges/users.svg)](https://www.codetriage.com/pragtob/benchee)
 
-Contributions to benchee are **very welcome**! Bug reports, documentation, spelling corrections, whole features, feature ideas, bugfixes, new plugins, fancy graphics... all of those (and probably more) are much appreciated contributions!
+Contributions to Benchee are **very welcome**! Bug reports, documentation, spelling corrections, whole features, feature ideas, bugfixes, new plugins, fancy graphics... all of those (and probably more) are much appreciated contributions!
 
 Keep in mind that the [plugins](#plugins) live in their own repositories with their own issue tracker and they also like to get contributions :)
 
@@ -890,3 +900,11 @@ Note that if the change includes adding new statistics you might need to introdu
 * `mix dialyzer` to run dialyzer for type checking, might take a while on the first invocation (try building plts first with `mix dialyzer --plt`)
 * `mix credo --strict` to find code style problems
 * or run `mix guard` to run all of them continuously on file change
+
+
+## Copyright and License
+
+Copyright (c) 2016 Tobias Pfeiffer
+
+This library is MIT licensed. See the
+[LICENSE.md](https://github.com/PragTob/benchee/blob/main/LICENSE.md) for details.

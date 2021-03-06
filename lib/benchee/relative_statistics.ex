@@ -61,7 +61,7 @@ defmodule Benchee.RelativeStatistics do
   end
 
   # right now we take the first scenario as we sorted them and it is the fastest,
-  # whenever we implement #179 though this becomesd more involved
+  # whenever we implement #179 though this becomes more involved
   defp split_reference_scenario(scenarios) do
     [reference | others] = scenarios
     {reference, others}

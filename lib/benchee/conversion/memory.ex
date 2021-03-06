@@ -2,7 +2,7 @@ defmodule Benchee.Conversion.Memory do
   @moduledoc """
   Unit scaling for memory converting from bytes to kilobytes and others.
 
-  Only benchee plugins should use this code.
+  Only Benchee plugins should use this code.
   """
 
   alias Benchee.Conversion.{Format, Scale, Unit}

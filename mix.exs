@@ -1,6 +1,7 @@
 defmodule Benchee.Mixfile do
   use Mix.Project
 
+  @source_url "https://github.com/bencheeorg/benchee"
   @version "1.0.1"
 
   def project do
@@ -13,11 +14,7 @@ defmodule Benchee.Mixfile do
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      docs: [
-        source_ref: @version,
-        extras: ["README.md"],
-        main: "readme"
-      ],
+      docs: docs(),
       package: package(),
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
@@ -33,7 +30,6 @@ defmodule Benchee.Mixfile do
         plt_file: {:no_warn, "priv/plts/benchee.plt"}
       ],
       name: "Benchee",
-      source_url: "https://github.com/PragTob/benchee",
       description: """
       Versatile (micro) benchmarking that is extensible. Get statistics such as:
       average, iterations per second, standard deviation and the median.
@@ -53,11 +49,10 @@ defmodule Benchee.Mixfile do
       {:deep_merge, "~> 1.0"},
       {:statistex, "~> 1.0"},
       {:ex_guard, "~> 1.3", only: :dev},
-      {:credo, "~> 1.0", only: :dev},
-      {:ex_doc, "~> 0.20", only: :dev},
-      {:earmark, "~> 1.0", only: :dev},
+      {:credo, "~> 1.0", only: :dev, runtime: false},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:excoveralls, "~> 0.13", only: :test},
-      {:inch_ex, "~> 2.0", only: :docs},
+      {:inch_ex, "~> 2.0", only: :docs, runtime: false},
       {:dialyxir, "~> 1.0.0-rc.4", only: :dev, runtime: false}
     ]
   end
@@ -67,9 +62,20 @@ defmodule Benchee.Mixfile do
       maintainers: ["Tobias Pfeiffer", "Devon Estes"],
       licenses: ["MIT"],
       links: %{
-        "github" => "https://github.com/PragTob/benchee",
+        "Changelog" => "https://hexdocs.pm/benchee/changelog.html",
+        "GitHub" => @source_url,
         "Blog posts" => "https://pragtob.wordpress.com/tag/benchee/"
       }
+    ]
+  end
+
+  defp docs do
+    [
+      extras: ["CHANGELOG.md", "README.md"],
+      main: "readme",
+      source_url: @source_url,
+      source_ref: @version,
+      skip_undefined_reference_warnings_on: ["CHANGELOG.md"]
     ]
   end
 end

@@ -1,8 +1,8 @@
 defmodule Benchee.Formatter do
   @moduledoc """
-  Defines a behaviour for formatters in benchee, and functions to work with these.
+  Defines a behaviour for formatters in Benchee, and functions to work with these.
 
-  When implementing a benchee formatter as a behaviour please adopt this
+  When implementing a Benchee formatter as a behaviour please adopt this
   behaviour, as it helps with uniformity and also allows at least the `.format`
   function of formatters to be run in parallel.
 
@@ -22,7 +22,7 @@ defmodule Benchee.Formatter do
   @doc """
   Takes the suite and returns whatever representation the formatter wants to use
   to output that information. It is important that this function **needs to be
-  pure** (aka have no side effects) as benchee will run `format/1` functions
+  pure** (aka have no side effects) as Benchee will run `format/1` functions
   of multiple formatters in parallel. The result will then be passed to
   `write/1`.
   """

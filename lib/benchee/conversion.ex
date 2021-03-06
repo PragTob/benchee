@@ -1,8 +1,8 @@
 defmodule Benchee.Conversion do
   @moduledoc """
-  Integration of the conversion of multiple units with benchee.
+  Integration of the conversion of multiple units with Benchee.
 
-  Can be used by plugins to use benchee unit scaling logic.
+  Can be used by plugins to use Benchee unit scaling logic.
   """
 
   alias Benchee.Conversion.{Count, Duration, Memory}

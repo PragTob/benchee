@@ -1,6 +1,6 @@
 defmodule Benchee.Suite do
   @moduledoc """
-  Main benchee data structure that aggregates the results from every step.
+  Main Benchee data structure that aggregates the results from every step.
 
   Different layers of the benchmarking rely on different data being present
   here. For instance for `Benchee.Statistics.statistics/1` to work the

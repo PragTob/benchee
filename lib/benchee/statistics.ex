@@ -35,7 +35,7 @@ defmodule Benchee.Statistics do
   @typedoc """
   All the statistics `statistics/1` computes from the samples.
 
-  Overview of all the statistics benchee currently provides:
+  Overview of all the statistics Benchee currently provides:
 
     * average       - average run time of the job in μs (the lower the better)
     * ips           - iterations per second, how often can the given function be

@@ -138,7 +138,7 @@ defmodule Benchee.Configuration do
   Generated configuration struct from the user supplied configuration options.
 
   Filled in with a lot of defaults. Also notably every option is already converted to
-  a map or struct at this point for easier handling in benchee.
+  a map or struct at this point for easier handling in Benchee.
   """
   @type t :: %__MODULE__{
           parallel: integer,
