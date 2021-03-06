@@ -2,7 +2,7 @@ defmodule Benchee.Utility.DeepConvert do
   @moduledoc false
 
   @doc """
-  Converts a deep keywordlist to the corresponding deep map.
+  Converts a deep keyword list to the corresponding deep map.
 
   ## Examples
 

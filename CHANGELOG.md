@@ -1,3 +1,5 @@
+# Changelog
+
 ## 1.0.1 (2019-04-09)
 
 ### Bugfixes (User Facing)
@@ -17,7 +19,7 @@ We're aiming to follow Semantic Versioning as we go forward. That means formatte
 
 ## 0.99.0 (2019-03-28)
 
-The "we're almost 1.0!" release - all the last small features, a bag of polish and deprecation warnings. If you run this release succesfully without deprecation warnings you should be safe to upgrade to 1.0.0, if not - it's a bug :)
+The "we're almost 1.0!" release - all the last small features, a bag of polish and deprecation warnings. If you run this release successfully without deprecation warnings you should be safe to upgrade to 1.0.0, if not - it's a bug :)
 
 ### Breaking Changes (User Facing)
 * changed official Elixir compatibility to `~> 1.6`, 1.4+ should still work but aren't guaranteed or tested against.
@@ -47,7 +49,7 @@ Highlights of this release are a new way to specify formatter options closer to 
 * Usage of `formatter_options` is deprecated, instead please use the new tuple way
 
 ### Features (User Facing)
-* benchee now uses the maximum precision available to measure which on Linux and OSX is nanoseonds instead of microseconds. Somewhat surprisingly `:timer.tc/1` always cut down to microseconds although better precision is available.
+* Benchee now uses the maximum precision available to measure which on Linux and OSX is nanoseonds instead of microseconds. Somewhat surprisingly `:timer.tc/1` always cut down to microseconds although better precision is available.
 * The preferred way to specify formatters and their options is to specify them as a tuple `{module, options}` instead of using `formatter_options`.
 * New `Formatter.output/1` function that takes a suite and uses all configured formatters to output their results
 * Add the concept of a benchmarking title that formatters can pick up
@@ -83,7 +85,7 @@ Mostly fixing memory measurement bugs and related issues :) Enjoy a better memor
 
 ### Bugfixes (User Facing)
 * Memory measurements now correctly take the old generation on the heap into account. In reality that means sometimes bigger results and no missing measurements. See [#216](https://github.com/PragTob/benchee/pull/216) for details. Thanks to @michalmuskala for providing an interesting sample.
-* Formatters are now more robust (aka not crashing) when dealing with partially missing memory measurements. Although it shouldn't happen anymore with the item before fixed, benchee shouldn't crash on you so we want to be on the safe side.
+* Formatters are now more robust (aka not crashing) when dealing with partially missing memory measurements. Although it shouldn't happen anymore with the item before fixed, Benchee shouldn't crash on you so we want to be on the safe side.
 * It's now possible to run just memory measurements (i.e. `time: 0, warmup: 0, memory_time: 1`)
 * even when you already have scenarios tagged with `-2` etc. it still correctly produces `-3`, `-4` etc. when saving again with the same "base tage name"
 
@@ -158,24 +160,24 @@ This release focuses on 2 main things: the internal restructuring to use _scenar
 
 ### Bugfixes (User Facing)
 * Determining CPUs was too strict/too assuming of a specific pattern breaking in certain environments (like Semaphore CI). That is more relaxed now thanks to `@predrag-rakic`!
-* Memory is now correctly converted using the binary (1024) interpreation, instead of the decimal one (1000)
+* Memory is now correctly converted using the binary (1024) interpretation, instead of the decimal one (1000)
 
 
 ### Features (Plugins)
 * the statistics now also provide the mode of the samples as well as the 99th percentile
 * There is a new `Benchee.Formatter` behaviour to adopt and enforce a uniform format for formatters, best to do `use Benchee.Formatter`
 
-### Breakin Changes (Plugins)
-* `:run_times`, `:statistics` and `:jobs` have been removed and folded together into `:scenarios` - a scenario holds the benchmarking function, porentially the input, the raw run times measures and the computed statistics. With this data structure, all the relevant data for one scenario is one place although it takes a lot to change, this seems to be the best way going forward. Huge thanks to `@devonestes`!
+### Breaking Changes (Plugins)
+* `:run_times`, `:statistics` and `:jobs` have been removed and folded together into `:scenarios` - a scenario holds the benchmarking function, potentially the input, the raw run times measures and the computed statistics. With this data structure, all the relevant data for one scenario is one place although it takes a lot to change, this seems to be the best way going forward. Huge thanks to `@devonestes`!
 
 ## 0.9.0 (2017-06-08)
 
-This release focuses on adding more system specific information like CPU etc. and for better erlang compatibilityif you wanna use benchee from erlang. There is an [example project](https://github.com/PragTob/benchee_erlang_try) but calling Elixir from Erlang hasn't been as easy as I hoped :)
+This release focuses on adding more system specific information like CPU etc. and for better Erlang compatibility if you wanna use Benchee from Erlang. There is an [example project](https://github.com/PragTob/benchee_erlang_try) but calling Elixir from Erlang hasn't been as easy as I hoped :)
 
 ### Features (User Facing)
 * Gather more system data like number of cores, Operating System, memory, cpu speed - thanks @devonestes and @OvermindDL1
 * the names for jobs in the map of `Benchee.run/2` or in `Benchee.benchmark/3` may now be given as strings or atoms - atoms will be converted to strings internally though for consistency and avoiding name duplicates
-* the names of inputs in the benchee configuration may now be given as strings or atoms - atoms will be converted to strings internally though for consistency and avoiding name duplicates
+* the names of inputs in the Benchee configuration may now be given as strings or atoms - atoms will be converted to strings internally though for consistency and avoiding name duplicates
 * Benchee is now also available _"Erlang Style"_ to be called on an atom like `:benchee.run(_, _)` for better Erlang compatibility
 
 ## 0.8.0 (2017-05-07)
@@ -232,7 +234,7 @@ The biggest feature apart from that is the possibility to use multiple inputs - 
 ### Features (User Facing)
 
 * New `:inputs` configuration key that allows you to specify a map from input name to input value so that each defined benchmarking job is then executed with this input. For this to work the benchmarking function is called with the appropriate `input` as an argument. See [`samples/multiple_inputs.exs`](https://github.com/PragTob/benchee/blob/master/samples/multiple_inputs.exs) for an example. [#21]( https://github.com/PragTob/benchee/issues/21)
-* The highlevel `Benchee.run/2` is now more idiomatic elixir and takes the map of jobs as the first argument and a keywordlist of options as the second (and last) argument. The old way of passing config as a map as the first argument and the jobs as the second argument still works, **but might be deprecated later on** [#47](https://github.com/PragTob/benchee/issues/47)
+* The highlevel `Benchee.run/2` is now more idiomatic elixir and takes the map of jobs as the first argument and a keyword list of options as the second (and last) argument. The old way of passing config as a map as the first argument and the jobs as the second argument still works, **but might be deprecated later on** [#47](https://github.com/PragTob/benchee/issues/47)
 * Along with that `Benchee.init/1` now also accepts keyword lists of course
 
 ### Breaking Changes (User Facing)
@@ -242,7 +244,7 @@ The biggest feature apart from that is the possibility to use multiple inputs - 
 ### Features (Plugins)
 
 * `Benchee.Utility.FileCreation` module to help with creating files from a map of multiple inputs (or other descriptors) mapping to input and an `interleave` function that spits out the correct file names especially if the `:__no_input` marker is used
-* `Benchee.System` is available to retrieve elixir and erlang versions but it's
+* `Benchee.System` is available to retrieve Elixir and Erlang versions but it's
 also already added to the suite during `Benchee.run/2`
 
 ### Breaking Changes (Plugins)
@@ -253,7 +255,7 @@ also already added to the suite during `Benchee.run/2`
 
 * prewarming (discarding the first result due to some timer issues) during run time was removed, as it should already happen during the warmup period and would discard actual useful results especially for longer running macro benchmarks.
 * when the execution time of the benchmarking job exceeds the given `:time` it will now execute exactly once (used to be 2) [#49](https://github.com/PragTob/benchee/issues/49)
-* `run_times` are now in the order as recorded (used to be reverse) - important when wants to graph them/look at them to see if there are any anomalities during benchmarking
+* `run_times` are now in the order as recorded (used to be reverse) - important when wants to graph them/look at them to see if there are any anomalies during benchmarking
 * Remove elixir 1.4.0-rc.0 warnings
 
 ## 0.5.0 (October 13, 2016)
@@ -280,10 +282,10 @@ This release focuses on scaling units to more appropriate sizes. Instead of alwa
 
 ## 0.4.0 (September 11, 2016)
 
-Focuses on making what benchee print out configurable to make it fit to your preferences :)
+Focuses on making what Benchee print out configurable to make it fit to your preferences :)
 
 ### Features (User Facing)
-* The configuration now has a `:print` key where it is possible to configure in a map what benchee prints out during benchmarking. All options are enabled by default (true). Options are:
+* The configuration now has a `:print` key where it is possible to configure in a map what Benchee prints out during benchmarking. All options are enabled by default (true). Options are:
   * `:benchmarking`  - print when Benchee starts benchmarking a new job (Benchmarking name ..)
   * `:configuration` - a summary of configured benchmarking options including estimated total run time is printed before benchmarking starts
   * `:fast_warning` - warnings are displayed if functions are executed too    fast leading to inaccurate measures

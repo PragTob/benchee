@@ -4,7 +4,7 @@ defmodule Benchee.Formatters.TaggedSave do
   scenarios of the current run with a specified tag - can be used for storing
   and later loading the results of previous runs with `Benchee.ScenarioLoader`.
 
-  Automatically configured as the last formatter to run when specifiying the
+  Automatically configured as the last formatter to run when specifying the
   `save` option in the configuration - see `Benchee.Configuration`.
   """
 

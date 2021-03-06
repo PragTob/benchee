@@ -2,7 +2,7 @@ defmodule Benchee.Conversion.Count do
   @moduledoc """
   Unit scaling for counts, such that 1000000 can be converted to 1 Million.
 
-  Only benchee plugins should use this code.
+  Only Benchee plugins should use this code.
   """
 
   alias Benchee.Conversion.{Format, Scale, Unit}
