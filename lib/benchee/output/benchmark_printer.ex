@@ -86,7 +86,7 @@ defmodule Benchee.Output.BenchmarkPrinter do
     do: nil
 
   def benchmarking(name, input_name, _config) do
-    IO.puts("Benchmarking #{name}#{input_information(input_name)}...")
+    IO.puts("Benchmarking #{name}#{input_information(input_name)} ...")
   end
 
   @no_input Benchmark.no_input()
